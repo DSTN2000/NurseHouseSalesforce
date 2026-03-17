@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Nurse__c</fullName>
+    <type>Lookup</type>
+    <label>Nurse</label>
+    <description>The nurse assigned to this visit (Person Account)</description>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Scheduled Visits (Nurse)</relationshipLabel>
+    <relationshipName>Scheduled_Visits_Nurse</relationshipName>
+    <required>true</required>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <securityClassification>Internal</securityClassification>
+</CustomField>

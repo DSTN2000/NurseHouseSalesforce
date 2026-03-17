@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField>
+    <fullName>Type__c</fullName>
+    <type>Picklist</type>
+    <inlineHelpText/>
+    <required>true</required>
+    <description>Type of action centre: Medical Centre or Client Support Centre</description>
+    <label>Type</label>
+    <valueSet>
+        <valueSetDefinition>
+            <value>
+                <fullName>Medical Centre</fullName>
+                <label>Medical Centre</label>
+                <default>true</default>
+            </value>
+            <value>
+                <fullName>Client Support Centre</fullName>
+                <label>Client Support Centre</label>
+                <default>false</default>
+            </value>
+            <sorted>true</sorted>
+        </valueSetDefinition>
+    </valueSet>
+    <securityClassification>Internal</securityClassification>
+</CustomField>

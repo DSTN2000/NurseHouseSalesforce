@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Work_Time__c</fullName>
+    <type>Text</type>
+    <label>Work Time</label>
+    <description>Working hours of the action centre, e.g. Mon-Fri 9:00-18:00</description>
+    <required>false</required>
+    <length>255</length>
+    <securityClassification>Internal</securityClassification>
+    <unique>false</unique>
+    <caseSensitive>false</caseSensitive>
+</CustomField>

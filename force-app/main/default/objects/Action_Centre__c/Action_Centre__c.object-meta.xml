@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject>
+    <pluralLabel>Action Centres</pluralLabel>
+    <fullName>Action_Centre__c</fullName>
+    <description>Represents a Nurse House action centre, either a Medical Centre or a Client Support Centre</description>
+    <nameField>
+        <label>Action Centre Name</label>
+        <type>Text</type>
+    </nameField>
+    <enableHistory>true</enableHistory>
+    <enableActivities>true</enableActivities>
+    <enableSearch>true</enableSearch>
+    <enableFeeds>true</enableFeeds>
+    <enableReports>true</enableReports>
+    <enableBulkApi>true</enableBulkApi>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <sharingModel>ReadWrite</sharingModel>
+    <label>Action Centre</label>
+    <deploymentStatus>Deployed</deploymentStatus>
+</CustomObject>

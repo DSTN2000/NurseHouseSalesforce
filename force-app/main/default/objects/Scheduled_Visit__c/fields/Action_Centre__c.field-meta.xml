@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Action_Centre__c</fullName>
+    <type>Lookup</type>
+    <label>Action Centre</label>
+    <description>The action centre associated with this visit</description>
+    <referenceTo>Action_Centre__c</referenceTo>
+    <relationshipLabel>Scheduled Visits</relationshipLabel>
+    <relationshipName>Scheduled_Visits</relationshipName>
+    <required>false</required>
+    <securityClassification>Internal</securityClassification>
+</CustomField>

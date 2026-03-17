@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Procedure__c</fullName>
+    <type>Lookup</type>
+    <label>Procedure</label>
+    <description>The procedure (Product2) performed during this visit</description>
+    <referenceTo>Product2</referenceTo>
+    <relationshipLabel>Visit Procedures</relationshipLabel>
+    <relationshipName>Visit_Procedures</relationshipName>
+    <required>false</required>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <securityClassification>Internal</securityClassification>
+</CustomField>

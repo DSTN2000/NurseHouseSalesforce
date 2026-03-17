@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField>
+    <fullName>Phone__c</fullName>
+    <type>Phone</type>
+    <inlineHelpText/>
+    <required>false</required>
+    <description>Contact phone number of the action centre</description>
+    <label>Phone</label>
+    <securityClassification>Internal</securityClassification>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Visit_Date_Time__c</fullName>
+    <type>DateTime</type>
+    <label>Visit Date Time</label>
+    <description>The scheduled date and time of the visit</description>
+    <required>true</required>
+    <securityClassification>Internal</securityClassification>
+</CustomField>

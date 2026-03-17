@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject>
+    <pluralLabel>Scheduled Visits</pluralLabel>
+    <fullName>Scheduled_Visit__c</fullName>
+    <description>Represents a scheduled home visit by a nurse to a client</description>
+    <nameField>
+        <label>Scheduled Visit Name</label>
+        <type>AutoNumber</type>
+        <displayFormat>SV-{0000}</displayFormat>
+    </nameField>
+    <enableHistory>true</enableHistory>
+    <enableActivities>true</enableActivities>
+    <enableSearch>true</enableSearch>
+    <enableFeeds>true</enableFeeds>
+    <enableReports>true</enableReports>
+    <enableBulkApi>true</enableBulkApi>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <sharingModel>Private</sharingModel>
+    <label>Scheduled Visit</label>
+    <deploymentStatus>Deployed</deploymentStatus>
+</CustomObject>
