@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Work_Time__c</fullName>
-    <type>Text</type>
+    <type>Lookup</type>
     <label>Work Time</label>
-    <description>Working hours of the action centre, e.g. Mon-Fri 9:00-18:00</description>
+    <description>The operating hours and time slots for this action centre</description>
+    <referenceTo>OperatingHours</referenceTo>
+    <relationshipLabel>Action Centres</relationshipLabel>
+    <relationshipName>Action_Centres</relationshipName>
     <required>false</required>
-    <length>255</length>
+    <deleteConstraint>SetNull</deleteConstraint>
     <securityClassification>Internal</securityClassification>
-    <unique>false</unique>
-    <caseSensitive>false</caseSensitive>
 </CustomField>
