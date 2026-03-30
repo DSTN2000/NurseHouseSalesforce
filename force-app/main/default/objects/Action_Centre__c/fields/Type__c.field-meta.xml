@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CustomField>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Type__c</fullName>
-    <type>Picklist</type>
-    <inlineHelpText/>
-    <required>true</required>
     <description>Type of action centre: Medical Centre or Client Support Centre</description>
     <label>Type</label>
+    <required>true</required>
+    <securityClassification>Internal</securityClassification>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
     <valueSet>
         <valueSetDefinition>
-            <value>
-                <fullName>Medical Centre</fullName>
-                <label>Medical Centre</label>
-                <default>true</default>
-            </value>
+            <sorted>false</sorted>
             <value>
                 <fullName>Client Support Centre</fullName>
-                <label>Client Support Centre</label>
                 <default>false</default>
+                <label>Client Support Centre</label>
             </value>
-            <sorted>true</sorted>
+            <value>
+                <fullName>Medical Centre</fullName>
+                <default>true</default>
+                <label>Medical Centre</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
-    <securityClassification>Internal</securityClassification>
 </CustomField>

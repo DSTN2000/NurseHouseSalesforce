@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <aggregateTypes>Unique</aggregateTypes>
+        <field>Scheduled_Visit__c.Visit_Procedures__r$Id</field>
+    </columns>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Scheduled_Visit__c.Visit_Procedures__r$Procedure__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Top 10 Procedures</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Scheduled_Visits_with_Procedures__c</reportType>
+    <scope>user</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <sortColumn>Scheduled_Visit__c.Visit_Procedures__r$Id</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Scheduled_Visit__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

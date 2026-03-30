@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Status__c</fullName>
-    <type>Picklist</type>
-    <label>Status</label>
     <description>Current status of the scheduled visit</description>
+    <label>Status</label>
     <required>true</required>
+    <securityClassification>Internal</securityClassification>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
     <valueSet>
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
                 <fullName>Scheduled</fullName>
-                <label>Scheduled</label>
                 <default>true</default>
+                <label>Scheduled</label>
             </value>
             <value>
                 <fullName>Completed</fullName>
-                <label>Completed</label>
                 <default>false</default>
+                <label>Completed</label>
             </value>
             <value>
                 <fullName>Cancelled</fullName>
-                <label>Cancelled</label>
                 <default>false</default>
+                <label>Cancelled</label>
             </value>
         </valueSetDefinition>
     </valueSet>
-    <securityClassification>Internal</securityClassification>
 </CustomField>

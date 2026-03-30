@@ -2,15 +2,12 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Action_Centre__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
-    <description>The action centre associated with this visit</description>
+    <description>The action centre this nurse is assigned to</description>
     <label>Action Centre</label>
     <referenceTo>Action_Centre__c</referenceTo>
-    <relationshipLabel>Scheduled Visits</relationshipLabel>
-    <relationshipName>Scheduled_Visits</relationshipName>
+    <relationshipLabel>Nurses</relationshipLabel>
+    <relationshipName>Nurses</relationshipName>
     <required>false</required>
-    <securityClassification>Internal</securityClassification>
     <trackFeedHistory>false</trackFeedHistory>
-    <trackHistory>false</trackHistory>
-    <trackTrending>false</trackTrending>
     <type>Lookup</type>
 </CustomField>

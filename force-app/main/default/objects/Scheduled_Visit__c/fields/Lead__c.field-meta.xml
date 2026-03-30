@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Lead__c</fullName>
-    <type>Lookup</type>
-    <label>Lead</label>
+    <deleteConstraint>SetNull</deleteConstraint>
     <description>The prospective client (Lead) for this visit</description>
+    <label>Lead</label>
     <referenceTo>Lead</referenceTo>
     <relationshipLabel>Scheduled Visits</relationshipLabel>
     <relationshipName>Scheduled_Visits</relationshipName>
     <required>false</required>
     <securityClassification>Internal</securityClassification>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
 </CustomField>

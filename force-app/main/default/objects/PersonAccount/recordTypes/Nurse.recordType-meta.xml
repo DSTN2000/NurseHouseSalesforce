@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Business_Account</fullName>
+    <fullName>Nurse</fullName>
     <active>true</active>
-    <label>Business Account</label>
+    <label>Nurse</label>
     <picklistValues>
         <picklist>AccountSource</picklist>
         <values>
