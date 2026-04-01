@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Scheduled_Visit__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The scheduled visit this review relates to</description>
+    <label>Scheduled Visit</label>
+    <referenceTo>Scheduled_Visit__c</referenceTo>
+    <relationshipLabel>Nurse Reviews</relationshipLabel>
+    <relationshipName>Nurse_Reviews</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
