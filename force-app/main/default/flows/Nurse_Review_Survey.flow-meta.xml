@@ -18,6 +18,7 @@
     </dynamicChoiceSets>
     <environments>Default</environments>
     <interviewLabel>Nurse_Review_Survey {!$Flow.CurrentDateTime}</interviewLabel>
+    <isAdditionalPermissionRequiredToRun>true</isAdditionalPermissionRequiredToRun>
     <label>Nurse_Review_Survey</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -81,7 +82,7 @@
             <field>Id</field>
             <operator>EqualTo</operator>
             <value>
-                <elementReference>visitRecord.Nurse__r.Id</elementReference>
+                <elementReference>visitRecord.Nurse__c</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
@@ -109,6 +110,7 @@
         <object>Scheduled_Visit__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <description>Read-only confirmation screen</description>
         <name>Nurse_Info</name>

@@ -57,3 +57,6 @@ $RECYCLE.BIN/
 **/venv/
 
 *tmp.*
+
+*.md
+!README.md

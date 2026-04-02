@@ -8,7 +8,7 @@
         <developerName>dansoltan05_1</developerName>
         <isActive>true</isActive>
         <localPart>dansoltan05+1</localPart>
-        <runAsUser>test-udub3032d4hy@example.com</runAsUser>
+        <runAsUser>dansoltan05.c765529831a6@agentforce.com</runAsUser>
     </emailServicesAddresses>
     <functionInactiveAction>Bounce</functionInactiveAction>
     <functionName>EmailToCase</functionName>

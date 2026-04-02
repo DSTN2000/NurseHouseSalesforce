@@ -10,9 +10,9 @@
     <caseMergeInLightning>false</caseMergeInLightning>
     <closeCaseThroughStatusChange>false</closeCaseThroughStatusChange>
     <defaultCaseFeedLayoutOn>true</defaultCaseFeedLayoutOn>
-    <defaultCaseOwner>test-udub3032d4hy@example.com</defaultCaseOwner>
+    <defaultCaseOwner>dansoltan05.c765529831a6@agentforce.com</defaultCaseOwner>
     <defaultCaseOwnerType>User</defaultCaseOwnerType>
-    <defaultCaseUser>test-udub3032d4hy@example.com</defaultCaseUser>
+    <defaultCaseUser>dansoltan05.c765529831a6@agentforce.com</defaultCaseUser>
     <emailToCase>
         <enableE2CAttachmentAsFile>false</enableE2CAttachmentAsFile>
         <enableE2CDeduplicateAttachments>false</enableE2CDeduplicateAttachments>
@@ -33,7 +33,7 @@
         <routingAddresses>
             <addressType>EmailToCase</addressType>
             <caseOrigin>Email</caseOrigin>
-            <caseOwner>test-udub3032d4hy@example.com</caseOwner>
+            <caseOwner>dansoltan05.c765529831a6@agentforce.com</caseOwner>
             <caseOwnerType>User</caseOwnerType>
             <casePriority>Medium</casePriority>
             <createTask>false</createTask>
