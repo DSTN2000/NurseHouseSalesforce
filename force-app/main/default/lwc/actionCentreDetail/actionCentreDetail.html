@@ -1,0 +1,75 @@
+<template>
+    <template lwc:if={isLoading}>
+        <div class="slds-align_absolute-center slds-p-around_large">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+
+    <template lwc:elseif={hasError}>
+        <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+            <span class="slds-assistive-text">Error</span>
+            <p>Unable to load Action Centre details. Please try again later.</p>
+        </div>
+    </template>
+
+    <template lwc:else>
+        <article class="slds-card">
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                            <span>{centre.Name}</span>
+                        </h2>
+                        <p class="slds-text-body_small slds-text-color_weak">{centre.Type__c}</p>
+                    </div>
+                </header>
+            </div>
+
+            <div class="slds-card__body slds-card__body_inner">
+                <dl class="slds-dl_horizontal slds-wrap">
+                    <template lwc:if={centre.Description__c}>
+                        <dt class="slds-dl_horizontal__label slds-text-color_weak">Description</dt>
+                        <dd class="slds-dl_horizontal__detail">{centre.Description__c}</dd>
+                    </template>
+
+                    <template lwc:if={centre.Address__c}>
+                        <dt class="slds-dl_horizontal__label slds-text-color_weak">Address</dt>
+                        <dd class="slds-dl_horizontal__detail">{centre.Address__c}</dd>
+                    </template>
+
+                    <template lwc:if={centre.Work_Time__c}>
+                        <dt class="slds-dl_horizontal__label slds-text-color_weak">Working Hours</dt>
+                        <dd class="slds-dl_horizontal__detail">{centre.Work_Time__c}</dd>
+                    </template>
+
+                    <template lwc:if={isClientSupport}>
+                        <template lwc:if={centre.Phone__c}>
+                            <dt class="slds-dl_horizontal__label slds-text-color_weak">Phone</dt>
+                            <dd class="slds-dl_horizontal__detail">{centre.Phone__c}</dd>
+                        </template>
+                        <template lwc:if={centre.Email__c}>
+                            <dt class="slds-dl_horizontal__label slds-text-color_weak">Email</dt>
+                            <dd class="slds-dl_horizontal__detail">{centre.Email__c}</dd>
+                        </template>
+                    </template>
+                </dl>
+
+                <template lwc:if={hasNurses}>
+                    <div class="slds-m-top_medium">
+                        <h3 class="slds-text-heading_small slds-m-bottom_small">Our Nurses</h3>
+                        <ul class="slds-list_dotted">
+                            <template for:each={nurses} for:item="nurse">
+                                <li key={nurse.Id} class="slds-item">
+                                    <span>{nurse.Name}</span>
+                                    <template lwc:if={nurse.Phone}>
+                                        <span class="slds-text-color_weak slds-m-left_x-small">{nurse.Phone}</span>
+                                    </template>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </template>
+            </div>
+        </article>
+    </template>
+</template>
