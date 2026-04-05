@@ -17,8 +17,8 @@ const addContactInfo = (centre, displayInfo) => {
 
 const buildDescription = (centre) => {
     const displayInfo = [];
-    if (centre.Work_Time__c) {
-        displayInfo.push(`Hours: ${centre.Work_Time__c}`);
+    if (centre.Work_Time__r) {
+        displayInfo.push(`Hours: ${centre.Work_Time__r.Name}`);
     }
     displayInfo.push(centre.Address__c)
     if (centre.Type__c === CLIENT_SUPPORT_TYPE) {

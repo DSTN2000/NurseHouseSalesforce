@@ -37,9 +37,9 @@
                         <dd class="slds-dl_horizontal__detail">{centre.Address__c}</dd>
                     </template>
 
-                    <template lwc:if={centre.Work_Time__c}>
+                    <template lwc:if={centre.Work_Time__r}>
                         <dt class="slds-dl_horizontal__label slds-text-color_weak">Working Hours</dt>
-                        <dd class="slds-dl_horizontal__detail">{centre.Work_Time__c}</dd>
+                        <dd class="slds-dl_horizontal__detail">{centre.Work_Time__r.Name}</dd>
                     </template>
 
                     <template lwc:if={isClientSupport}>
