@@ -1,0 +1,25 @@
+<template>
+    <template lwc:if={hasError}>
+        <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+            <span class="slds-assistive-text">Error</span>
+            <p>Unable to load Action Centres. Please try again later.</p>
+        </div>
+    </template>
+    <template lwc:elseif={hasMarkers}>
+        <lightning-map
+            map-markers={mapMarkers}
+            zoom-level="12"
+            list-view="hidden"
+            onmarkerselect={handleMarkerSelect}
+            class="action-centre-map">
+        </lightning-map>
+    </template>
+    <template lwc:else>
+        <div class="slds-align_absolute-center slds-p-around_large">
+            <lightning-spinner
+                alternative-text="Loading Action Centres"
+                size="medium">
+            </lightning-spinner>
+        </div>
+    </template>
+</template>

@@ -1,7 +1,30 @@
 Id stdPbId = [SELECT Id FROM Pricebook2 WHERE IsStandard = true LIMIT 1].Id;
 
-Action_Centre__c centre = new Action_Centre__c(Name = 'City Medical Centre', Type__c = 'Medical Centre');
-upsert centre;
+List<Action_Centre__c> centres = new List<Action_Centre__c>{
+    new Action_Centre__c(
+        Name = 'City Medical Centre',
+        Type__c = 'Medical Centre',
+        Street__c = 'Wall Street',
+        City__c = 'New York',
+        Country__c = 'United States',
+        Latitude__c = 40.7058089,
+        Longitude__c = -74.0084337,
+        Description__c = 'Full-service medical centre providing professional nursing care.'
+    ),
+    new Action_Centre__c(
+        Name = 'Central Client Support Centre',
+        Type__c = 'Client Support Centre',
+        Street__c = 'Broadway',
+        City__c = 'New York',
+        Country__c = 'United States',
+        Latitude__c = 40.7079284,
+        Longitude__c = -74.0114693,
+        Description__c = 'Client support centre for consultations and service requests.',
+        Phone__c = '+12125550001',
+        Email__c = 'support@nursehouse.com'
+    )
+};
+upsert centres;
 
 Id nurseRtId = [SELECT Id FROM RecordType WHERE SObjectType = 'Account' AND DeveloperName = 'Nurse' LIMIT 1].Id;
 List<Account> nurses = new List<Account>{
@@ -37,11 +60,11 @@ upsert leads;
 
 DateTime base = DateTime.now();
 List<Scheduled_Visit__c> visits = new List<Scheduled_Visit__c>{
-    new Scheduled_Visit__c(Nurse__c = nurses[0].Id, Lead__c = leads[0].Id, Action_Centre__c = centre.Id, Visit_Date_Time__c = base,            Status__c = 'Completed', Total_Price__c = 55),
-    new Scheduled_Visit__c(Nurse__c = nurses[0].Id, Lead__c = leads[1].Id, Action_Centre__c = centre.Id, Visit_Date_Time__c = base.addDays(1), Status__c = 'Completed', Total_Price__c = 35),
-    new Scheduled_Visit__c(Nurse__c = nurses[1].Id, Lead__c = leads[2].Id, Action_Centre__c = centre.Id, Visit_Date_Time__c = base.addDays(2), Status__c = 'Completed', Total_Price__c = 25),
-    new Scheduled_Visit__c(Nurse__c = nurses[1].Id, Lead__c = leads[0].Id, Action_Centre__c = centre.Id, Visit_Date_Time__c = base.addDays(3), Status__c = 'Scheduled', Total_Price__c = 70),
-    new Scheduled_Visit__c(Nurse__c = nurses[2].Id, Lead__c = leads[1].Id, Action_Centre__c = centre.Id, Visit_Date_Time__c = base.addDays(4), Status__c = 'Completed', Total_Price__c = 50)
+    new Scheduled_Visit__c(Nurse__c = nurses[0].Id, Lead__c = leads[0].Id, Action_Centre__c = centres[0].Id, Visit_Date_Time__c = base,            Status__c = 'Completed', Total_Price__c = 55),
+    new Scheduled_Visit__c(Nurse__c = nurses[0].Id, Lead__c = leads[1].Id, Action_Centre__c = centres[0].Id, Visit_Date_Time__c = base.addDays(1), Status__c = 'Completed', Total_Price__c = 35),
+    new Scheduled_Visit__c(Nurse__c = nurses[1].Id, Lead__c = leads[2].Id, Action_Centre__c = centres[1].Id, Visit_Date_Time__c = base.addDays(2), Status__c = 'Completed', Total_Price__c = 25),
+    new Scheduled_Visit__c(Nurse__c = nurses[1].Id, Lead__c = leads[0].Id, Action_Centre__c = centres[1].Id, Visit_Date_Time__c = base.addDays(3), Status__c = 'Scheduled', Total_Price__c = 70),
+    new Scheduled_Visit__c(Nurse__c = nurses[2].Id, Lead__c = leads[1].Id, Action_Centre__c = centres[0].Id, Visit_Date_Time__c = base.addDays(4), Status__c = 'Completed', Total_Price__c = 50)
 };
 upsert visits;
 
