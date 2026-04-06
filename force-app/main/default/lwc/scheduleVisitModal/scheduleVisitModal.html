@@ -1,0 +1,216 @@
+<template>
+    <div class="slds-modal slds-fade-in-open" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+        <div class="slds-modal__container">
+
+            <!-- Header -->
+            <header class="slds-modal__header">
+                <button
+                    class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                    title="Close"
+                    onclick={handleClose}
+                >
+                    <lightning-icon icon-name="utility:close" size="small" alternative-text="Close"></lightning-icon>
+                </button>
+                <h2 id="modal-heading" class="slds-modal__title slds-hyphenate">
+                    Schedule Visit — {procedureName}
+                </h2>
+            </header>
+
+            <!-- Body -->
+            <div class="slds-modal__content slds-p-around_medium">
+
+                <!-- Error banner -->
+                <template lwc:if={hasError}>
+                    <div class="slds-notify slds-notify_alert slds-alert_error slds-m-bottom_medium" role="alert">
+                        <span class="slds-assistive-text">Error</span>
+                        <p>{errorMessage}</p>
+                    </div>
+                </template>
+
+                <!-- Section: Centre & Nurse -->
+                <fieldset class="slds-form-element slds-m-bottom_medium">
+                    <legend class="slds-form-element__legend slds-form-element__label slds-text-heading_small">
+                        Select Centre &amp; Nurse
+                    </legend>
+
+                    <div class="slds-form-element slds-m-top_small">
+                        <label class="slds-form-element__label" for="centreSelect">
+                            <abbr class="slds-required" title="required">*</abbr> Action Centre
+                        </label>
+                        <div class="slds-form-element__control">
+                            <div class="slds-select_container">
+                                <select id="centreSelect" class="slds-select" onchange={handleCentreChange}>
+                                    <template for:each={centreOptions} for:item="opt">
+                                        <option key={opt.value} value={opt.value}>{opt.label}</option>
+                                    </template>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <template lwc:if={hasNurseOptions}>
+                        <div class="slds-form-element slds-m-top_small">
+                            <label class="slds-form-element__label" for="nurseSelect">
+                                <abbr class="slds-required" title="required">*</abbr> Nurse
+                            </label>
+                            <div class="slds-form-element__control">
+                                <div class="slds-select_container">
+                                    <select id="nurseSelect" class="slds-select" onchange={handleNurseChange}>
+                                        <template for:each={nurseOptions} for:item="opt">
+                                            <option key={opt.value} value={opt.value}>{opt.label}</option>
+                                        </template>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template lwc:if={noNursesAvailable}>
+                        <p class="slds-text-color_weak slds-m-top_small">No active nurses at this centre.</p>
+                    </template>
+                </fieldset>
+
+                <!-- Section: Date & Address -->
+                <fieldset class="slds-form-element slds-m-bottom_medium">
+                    <legend class="slds-form-element__legend slds-form-element__label slds-text-heading_small">
+                        Visit Details
+                    </legend>
+
+                    <div class="slds-form-element slds-m-top_small">
+                        <label class="slds-form-element__label" for="visitDateTime">
+                            <abbr class="slds-required" title="required">*</abbr> Date &amp; Time
+                        </label>
+                        <div class="slds-form-element__control">
+                            <input
+                                type="datetime-local"
+                                id="visitDateTime"
+                                class="slds-input"
+                                min={minDateTime}
+                                onchange={handleDateTimeChange}
+                            />
+                        </div>
+                    </div>
+
+                    <div class="slds-form-element slds-m-top_small">
+                        <label class="slds-form-element__label" for="houseAddress">
+                            <abbr class="slds-required" title="required">*</abbr> House Address
+                        </label>
+                        <div class="slds-form-element__control">
+                            <input
+                                type="text"
+                                id="houseAddress"
+                                class="slds-input"
+                                placeholder="e.g. 12 Maple Street, Apt 3"
+                                value={houseAddress}
+                                oninput={handleAddressChange}
+                            />
+                        </div>
+                    </div>
+
+                    <div class="slds-form-element slds-m-top_small">
+                        <label class="slds-form-element__label" for="notes">Notes</label>
+                        <div class="slds-form-element__control">
+                            <textarea
+                                id="notes"
+                                class="slds-textarea"
+                                placeholder="Any additional notes (optional)"
+                                oninput={handleNotesChange}
+                            >{notes}</textarea>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Section: Client Info -->
+                <fieldset class="slds-form-element">
+                    <legend class="slds-form-element__legend slds-form-element__label slds-text-heading_small">
+                        Your Information
+                    </legend>
+
+                    <div class="slds-grid slds-gutters slds-m-top_small">
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="firstName">
+                                    <abbr class="slds-required" title="required">*</abbr> First Name
+                                </label>
+                                <div class="slds-form-element__control">
+                                    <input
+                                        type="text"
+                                        id="firstName"
+                                        class="slds-input"
+                                        value={firstName}
+                                        oninput={handleFirstNameChange}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="lastName">
+                                    <abbr class="slds-required" title="required">*</abbr> Last Name
+                                </label>
+                                <div class="slds-form-element__control">
+                                    <input
+                                        type="text"
+                                        id="lastName"
+                                        class="slds-input"
+                                        value={lastName}
+                                        oninput={handleLastNameChange}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slds-grid slds-gutters slds-m-top_small">
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="email">
+                                    <abbr class="slds-required" title="required">*</abbr> Email
+                                </label>
+                                <div class="slds-form-element__control">
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        class="slds-input"
+                                        value={email}
+                                        oninput={handleEmailChange}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="phone">
+                                    <abbr class="slds-required" title="required">*</abbr> Phone
+                                </label>
+                                <div class="slds-form-element__control">
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        class="slds-input"
+                                        value={phone}
+                                        oninput={handlePhoneChange}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- Footer -->
+            <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick={handleClose}>Cancel</button>
+                <button
+                    class="slds-button slds-button_brand"
+                    disabled={isSubmitDisabled}
+                    onclick={handleSubmit}
+                >
+                    <template lwc:if={isSubmitting}>Scheduling…</template>
+                    <template lwc:else>Schedule Visit</template>
+                </button>
+            </footer>
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

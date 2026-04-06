@@ -1,0 +1,152 @@
+<template>
+    <!-- Error state -->
+    <template lwc:if={hasError}>
+        <div class="slds-notify slds-notify_alert slds-alert_error" role="alert">
+            <span class="slds-assistive-text">Error</span>
+            <p>Unable to load procedures. Please try again later.</p>
+        </div>
+    </template>
+
+    <!-- Main content -->
+    <template lwc:else>
+        <!-- Toolbar (hidden when printing) -->
+        <div class="toolbar no-print">
+            <div class="slds-grid slds-gutters slds-wrap slds-m-bottom_medium">
+
+                <!-- Currency switcher -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_auto">
+                    <fieldset class="slds-form-element">
+                        <legend class="slds-form-element__legend slds-form-element__label">Currency</legend>
+                        <div class="slds-form-element__control slds-button-group" role="group">
+                            <template for:each={currencies} for:item="cur">
+                                <button
+                                    key={cur.value}
+                                    type="button"
+                                    class={cur.buttonClass}
+                                    value={cur.value}
+                                    onclick={handleCurrencyChange}
+                                >{cur.value}</button>
+                            </template>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- Name filter -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12">
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label" for="nameFilter">Search by name</label>
+                        <div class="slds-form-element__control">
+                            <input
+                                type="text"
+                                id="nameFilter"
+                                class="slds-input"
+                                placeholder="e.g. Blood Test"
+                                value={nameFilter}
+                                oninput={handleNameFilter}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Centre filter -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12">
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label" for="centreFilter">Filter by Centre</label>
+                        <div class="slds-form-element__control">
+                            <div class="slds-select_container">
+                                <select
+                                    id="centreFilter"
+                                    class="slds-select"
+                                    onchange={handleCentreFilter}
+                                >
+                                    <template for:each={centreOptions} for:item="opt">
+                                        <option key={opt.value} value={opt.value}>{opt.label}</option>
+                                    </template>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export button -->
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_auto slds-align-bottom">
+                    <button
+                        type="button"
+                        class="slds-button slds-button_neutral"
+                        onclick={handleExportPdf}
+                        title="Export as PDF"
+                    >
+                        Export PDF
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading state -->
+        <template lwc:if={isLoading}>
+            <div class="slds-align_absolute-center slds-p-around_large">
+                <lightning-spinner alternative-text="Loading procedures" size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <!-- Procedure grid -->
+        <template lwc:elseif={hasProcedures}>
+            <div class="slds-grid slds-gutters slds-wrap procedure-grid">
+                <template for:each={filteredProcedures} for:item="proc">
+                    <div key={proc.id} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3 slds-m-bottom_medium">
+                        <article class="slds-card procedure-card">
+                            <div class="slds-card__header">
+                                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                    <div class="slds-media__body">
+                                        <h2 class="slds-card__header-title slds-truncate" title={proc.name}>
+                                            {proc.name}
+                                        </h2>
+                                        <template lwc:if={proc.family}>
+                                            <p class="slds-text-body_small slds-text-color_weak">{proc.family}</p>
+                                        </template>
+                                    </div>
+                                </header>
+                            </div>
+                            <div class="slds-card__body slds-card__body_inner">
+                                <template lwc:if={proc.description}>
+                                    <p class="slds-text-body_regular slds-m-bottom_small">{proc.description}</p>
+                                </template>
+                                <p class="procedure-price">
+                                    <span class="slds-text-heading_medium">{proc.currencySymbol}{proc.displayPrice}</span>
+                                </p>
+                            </div>
+                            <div class="slds-card__footer no-print">
+                                <button
+                                    type="button"
+                                    class="slds-button slds-button_brand slds-button_stretch"
+                                    data-id={proc.id}
+                                    onclick={handleSelectProcedure}
+                                >
+                                    Schedule Visit
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <!-- Empty state -->
+        <template lwc:else>
+            <div class="slds-align_absolute-center slds-p-around_large">
+                <p class="slds-text-body_regular slds-text-color_weak">No procedures found.</p>
+            </div>
+        </template>
+    </template>
+
+    <!-- Schedule Visit Modal -->
+    <template lwc:if={showModal}>
+        <c-schedule-visit-modal
+            procedure-id={selectedProcedure.procedureId}
+            procedure-name={selectedProcedure.name}
+            usd-price={selectedProcedure.usdPrice}
+            onclose={handleModalClose}
+            onvisitscheduled={handleModalClose}
+        ></c-schedule-visit-modal>
+    </template>
+</template>
