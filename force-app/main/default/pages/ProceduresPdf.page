@@ -1,0 +1,79 @@
+<apex:page controller="ProcedurePdfController" renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false">
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                font-size: 12px;
+                color: #222;
+                margin: 20px;
+            }
+            h1 {
+                font-size: 18px;
+                margin-bottom: 4px;
+            }
+            .subtitle {
+                font-size: 11px;
+                color: #666;
+                margin-bottom: 24px;
+            }
+            h2 {
+                font-size: 14px;
+                background-color: #f0f0f0;
+                padding: 6px 8px;
+                margin-top: 20px;
+                margin-bottom: 0;
+                border-left: 4px solid #0070d2;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 0;
+            }
+            th {
+                background-color: #fafafa;
+                text-align: left;
+                padding: 6px 8px;
+                border-bottom: 1px solid #ddd;
+                font-size: 11px;
+                color: #555;
+            }
+            td {
+                padding: 6px 8px;
+                border-bottom: 1px solid #eee;
+                vertical-align: top;
+            }
+            .price {
+                text-align: right;
+                white-space: nowrap;
+                font-weight: bold;
+                width: 80px;
+            }
+            .description {
+                color: #555;
+                font-size: 11px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Nurse House — Procedures &amp; Pricing</h1>
+        <p class="subtitle">Currency: {!selectedCurrency}</p>
+
+        <apex:repeat value="{!sections}" var="section">
+            <h2>{!section.centreName}</h2>
+            <table>
+                <tr>
+                    <th>Procedure</th>
+                    <th>Description</th>
+                    <th class="price">Price</th>
+                </tr>
+                <apex:repeat value="{!section.procedures}" var="proc">
+                    <tr>
+                        <td>{!proc.name}</td>
+                        <td class="description">{!proc.description}</td>
+                        <td class="price">{!proc.price}</td>
+                    </tr>
+                </apex:repeat>
+            </table>
+        </apex:repeat>
+    </body>
+</apex:page>

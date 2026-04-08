@@ -2,6 +2,7 @@ import { LightningElement, wire, track } from 'lwc';
 import getProcedures from '@salesforce/apex/ProcedureController.getProcedures';
 import getCurrencyRates from '@salesforce/apex/ProcedureController.getCurrencyRates';
 import getCentreProcedures from '@salesforce/apex/ProcedureController.getCentreProcedures';
+import getPdfBaseUrl from '@salesforce/apex/ProcedurePdfController.getPdfBaseUrl';
 import getActionCentres from '@salesforce/apex/ActionCentreController.getActionCentres';
 
 
@@ -21,6 +22,7 @@ export default class ProcedureList extends LightningElement {
     _rates = null;
     _centres = [];
     _centreProcedures = [];
+    _pdfBaseUrl = '';
     _proceduresError = null;
 
     @wire(getProcedures)
@@ -55,6 +57,13 @@ export default class ProcedureList extends LightningElement {
     //         this._rates = null;
     //     }
     // }
+
+    @wire(getPdfBaseUrl)
+    wiredPdfBaseUrl({ data }) {
+        if (data) {
+            this._pdfBaseUrl = data;
+        }
+    }
 
     @wire(getCentreProcedures)
     wiredCentreProcedures({ data, error }) {
@@ -171,7 +180,6 @@ export default class ProcedureList extends LightningElement {
     }
 
     handleExportPdf() {
-        // TODO: replace with the proper PDF format
-        window.print();
+        window.open(this._pdfBaseUrl + '/apex/ProceduresPdf?currency=' + this.currency, '_blank');
     }
 }
