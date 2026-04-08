@@ -71,6 +71,14 @@ public without sharing class ProcedurePdfController {
         return URL.getOrgDomainUrl().toExternalForm();
     }
 
+    @AuraEnabled
+    public static String generatePdf(String selectedCurrency) {
+        PageReference page = new PageReference('/apex/ProceduresPdf');
+        page.getParameters().put('currency', selectedCurrency);
+        Blob pdfBlob = Test.isRunningTest() ? Blob.valueOf('PDF') : page.getContentAsPDF();
+        return EncodingUtil.base64Encode(pdfBlob);
+    }
+
     private static String formatPrice(Decimal usdPrice, String cur, Decimal usdToByn, Decimal eurToByn) {
         if (usdPrice == null) return '-';
         if (cur == 'BYN' && usdToByn != null) {

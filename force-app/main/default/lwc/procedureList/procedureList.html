@@ -74,9 +74,14 @@
                         type="button"
                         class="slds-button slds-button_neutral"
                         onclick={handleExportPdf}
+                        disabled={isExporting}
                         title="Export as PDF"
                     >
-                        Export PDF
+                        <template lwc:if={isExporting}>
+                            <lightning-spinner alternative-text="Generating PDF" size="x-small" class="slds-m-right_x-small"></lightning-spinner>
+                            Generating…
+                        </template>
+                        <template lwc:else>Export PDF</template>
                     </button>
                 </div>
             </div>

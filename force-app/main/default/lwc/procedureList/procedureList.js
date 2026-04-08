@@ -3,6 +3,7 @@ import getProcedures from '@salesforce/apex/ProcedureController.getProcedures';
 import getCurrencyRates from '@salesforce/apex/ProcedureController.getCurrencyRates';
 import getCentreProcedures from '@salesforce/apex/ProcedureController.getCentreProcedures';
 import getPdfBaseUrl from '@salesforce/apex/ProcedurePdfController.getPdfBaseUrl';
+import generatePdf from '@salesforce/apex/ProcedurePdfController.generatePdf';
 import getActionCentres from '@salesforce/apex/ActionCentreController.getActionCentres';
 
 
@@ -17,6 +18,7 @@ export default class ProcedureList extends LightningElement {
     @track nameFilter = '';
     @track centreFilter = '';
     @track selectedProcedure = null;
+    @track isExporting = false;
 
     _procedures = [];
     _rates = null;
@@ -179,7 +181,30 @@ export default class ProcedureList extends LightningElement {
         this.selectedProcedure = null;
     }
 
-    handleExportPdf() {
-        window.open(this._pdfBaseUrl + '/apex/ProceduresPdf?currency=' + this.currency, '_blank');
+    async handleExportPdf() {
+        this.isExporting = true;
+        try {
+            const base64 = await generatePdf({ selectedCurrency: this.currency });
+            const blob = this._base64ToBlob(base64, 'application/pdf');
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'procedures-' + this.currency + '.pdf';
+            a.click();
+            URL.revokeObjectURL(url);
+        } catch (err) {
+            console.error('PDF generation failed:', err);
+        } finally {
+            this.isExporting = false;
+        }
+    }
+
+    _base64ToBlob(base64, type) {
+        const binary = atob(base64);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+            bytes[i] = binary.charCodeAt(i);
+        }
+        return new Blob([bytes], { type });
     }
 }
