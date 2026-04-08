@@ -44,6 +44,16 @@ public without sharing class ProcedureController {
     }
 
     @AuraEnabled(cacheable=true)
+    public static List<Centre_Procedure__c> getCentreProcedures() {
+        return [
+            SELECT Id, Action_Centre__c, Procedure__c
+            FROM Centre_Procedure__c
+            WHERE Action_Centre__c != NULL
+              AND Procedure__c != NULL
+        ];
+    }
+
+    @AuraEnabled(cacheable=true)
     public static CurrencyRate__c getCurrencyRates() {
         return BnbCurrencyService.getCurrentRates();
     }

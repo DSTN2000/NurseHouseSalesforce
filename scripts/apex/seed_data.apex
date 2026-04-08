@@ -1,7 +1,8 @@
-// Wipe existing seed data 
+// Wipe existing seed data
 delete [SELECT Id FROM Visit_Procedure__c LIMIT 200];
 delete [SELECT Id FROM Scheduled_Visit__c LIMIT 200];
 delete [SELECT Id FROM Lead WHERE Company = 'N/A' LIMIT 200];
+delete [SELECT Id FROM Centre_Procedure__c LIMIT 200];
 
 Id nurseRtIdClean = [SELECT Id FROM RecordType WHERE SObjectType = 'Account' AND DeveloperName = 'Nurse' LIMIT 1].Id;
 delete [SELECT Id FROM Account WHERE RecordTypeId = :nurseRtIdClean LIMIT 200];
@@ -91,7 +92,24 @@ for (Integer i = 0; i < procedures.size(); i++) {
 }
 insert entries;
 
-// Leads 
+// Centre Procedures (many-to-many: which procedures each centre offers)
+List<Centre_Procedure__c> centreProcedures = new List<Centre_Procedure__c>{
+    // City Medical Centre: Blood Pressure Check, Wound Dressing, Injection, Blood Sugar Test
+    new Centre_Procedure__c(Action_Centre__c = centres[0].Id, Procedure__c = procedures[0].Id),
+    new Centre_Procedure__c(Action_Centre__c = centres[0].Id, Procedure__c = procedures[1].Id),
+    new Centre_Procedure__c(Action_Centre__c = centres[0].Id, Procedure__c = procedures[2].Id),
+    new Centre_Procedure__c(Action_Centre__c = centres[0].Id, Procedure__c = procedures[3].Id),
+    // Central Client Support Centre: Blood Pressure Check, Injection
+    new Centre_Procedure__c(Action_Centre__c = centres[1].Id, Procedure__c = procedures[0].Id),
+    new Centre_Procedure__c(Action_Centre__c = centres[1].Id, Procedure__c = procedures[2].Id),
+    // Brooklyn Medical Centre: Wound Dressing, Physiotherapy Session, Blood Sugar Test
+    new Centre_Procedure__c(Action_Centre__c = centres[2].Id, Procedure__c = procedures[1].Id),
+    new Centre_Procedure__c(Action_Centre__c = centres[2].Id, Procedure__c = procedures[3].Id),
+    new Centre_Procedure__c(Action_Centre__c = centres[2].Id, Procedure__c = procedures[4].Id)
+};
+insert centreProcedures;
+
+// Leads
 List<Lead> leads = new List<Lead>{
     new Lead(FirstName = 'Ivan',  LastName = 'Sokolov',  Company = 'N/A', Phone = '+375291000001'),
     new Lead(FirstName = 'Elena', LastName = 'Morozova', Company = 'N/A', Phone = '+375291000002'),
@@ -124,4 +142,4 @@ List<Visit_Procedure__c> vps = new List<Visit_Procedure__c>{
 };
 insert vps;
 
-System.debug('Seed complete: 2 operating hours, 2 centres, 3 nurses (assigned to centres), 5 procedures, 5 visits, 9 visit-procedures');
+System.debug('Seed complete: 2 operating hours, 3 centres, 3 nurses, 5 procedures, 9 centre-procedures, 5 visits, 9 visit-procedures');

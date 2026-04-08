@@ -1,6 +1,7 @@
 import { LightningElement, wire, track } from 'lwc';
 import getProcedures from '@salesforce/apex/ProcedureController.getProcedures';
 import getCurrencyRates from '@salesforce/apex/ProcedureController.getCurrencyRates';
+import getCentreProcedures from '@salesforce/apex/ProcedureController.getCentreProcedures';
 import getActionCentres from '@salesforce/apex/ActionCentreController.getActionCentres';
 
 
@@ -19,6 +20,7 @@ export default class ProcedureList extends LightningElement {
     _procedures = [];
     _rates = null;
     _centres = [];
+    _centreProcedures = [];
     _proceduresError = null;
 
     @wire(getProcedures)
@@ -54,6 +56,15 @@ export default class ProcedureList extends LightningElement {
     //     }
     // }
 
+    @wire(getCentreProcedures)
+    wiredCentreProcedures({ data, error }) {
+        if (data) {
+            this._centreProcedures = data;
+        } else if (error) {
+            this._centreProcedures = [];
+        }
+    }
+
     @wire(getActionCentres)
     wiredCentres({ data, error }) {
         if (data) {
@@ -78,8 +89,13 @@ export default class ProcedureList extends LightningElement {
 
     get filteredProcedures() {
         const name = this.nameFilter.toLowerCase();
+        const centre = this.centreFilter;
+        const allowedProductIds = centre
+            ? new Set(this._centreProcedures.filter(cp => cp.Action_Centre__c === centre).map(cp => cp.Procedure__c))
+            : null;
         return this._procedures
-            .filter(p => !name || p.Product2.Name.toLowerCase().includes(name))
+            .filter(p => (!name || p.Product2.Name.toLowerCase().includes(name))
+                      && (!allowedProductIds || allowedProductIds.has(p.Product2Id)))
             .map(p => ({
                 id: p.Id,
                 productId: p.Product2Id,
