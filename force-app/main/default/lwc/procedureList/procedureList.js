@@ -94,7 +94,7 @@ export default class ProcedureList extends LightningElement {
 
     get centreOptions() {
         const opts = [{ label: 'All Centres', value: '' }];
-        this._centres.forEach(c => opts.push({ label: c.Name, value: c.Id }));
+        this._centres.forEach(c => opts.push({ label: c.centre.Name, value: c.centre.Id }));
         return opts;
     }
 

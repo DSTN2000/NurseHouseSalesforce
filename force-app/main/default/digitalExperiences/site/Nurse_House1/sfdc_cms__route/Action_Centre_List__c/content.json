@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Action Centre List",
+  "contentBody" : {
+    "activeViewId" : "Action_Centre_List",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "list-Action_Centre__c",
+    "urlPrefix" : "action-centre"
+  },
+  "urlName" : "action-centre-list"
+}

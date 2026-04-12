@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Procedures",
+  "contentBody" : {
+    "activeViewId" : "Procedures",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-procedures",
+    "urlPrefix" : "procedures"
+  },
+  "urlName" : "procedures"
+}

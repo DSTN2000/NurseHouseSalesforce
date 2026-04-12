@@ -1,0 +1,5 @@
+{
+  "apiName" : "Action_Centre_List",
+  "type" : "sfdc_cms__view",
+  "path" : "views"
+}

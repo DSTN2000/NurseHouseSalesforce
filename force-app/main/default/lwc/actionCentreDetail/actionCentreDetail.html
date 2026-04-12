@@ -37,9 +37,15 @@
                         <dd class="slds-dl_horizontal__detail">{centre.Address__c}</dd>
                     </template>
 
-                    <template lwc:if={centre.Work_Time__r}>
+                    <template lwc:if={hasTimeSlots}>
                         <dt class="slds-dl_horizontal__label slds-text-color_weak">Working Hours</dt>
-                        <dd class="slds-dl_horizontal__detail">{centre.Work_Time__r.Name}</dd>
+                        <dd class="slds-dl_horizontal__detail">
+                            <ul class="slds-list_dotted slds-m-top_none">
+                                <template for:each={timeSlots} for:item="slot">
+                                    <li key={slot.key}><strong>{slot.day}:</strong> {slot.hours}</li>
+                                </template>
+                            </ul>
+                        </dd>
                     </template>
 
                     <template lwc:if={isClientSupport}>

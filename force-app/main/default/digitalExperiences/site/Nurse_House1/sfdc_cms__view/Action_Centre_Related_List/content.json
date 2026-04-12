@@ -1,0 +1,58 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Action Centre Related List",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"d9a3f0cb-9a5b-48a9-b1be-c6fb098fb6dd\",\"columns\":[{\"UUID\":\"94bab00b-ac96-4569-9dc1-c33a17356c30\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "id" : "94bab00b-ac96-4569-9dc1-c33a17356c30",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "d9a3f0cb-9a5b-48a9-b1be-c6fb098fb6dd",
+          "type" : "component"
+        } ],
+        "id" : "978cbd34-954b-4b55-94bf-776eff16a4c4",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "26aa1e19-6639-485b-93f0-62595e7aea41",
+          "type" : "component"
+        } ],
+        "id" : "3153d0c6-c7a7-4bc3-b69a-b7fb3bf37ebb",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "899acaa4-9932-4afd-8f15-a95c96fca53d",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "relatedlist-Action_Centre__c"
+  },
+  "urlName" : "action-centre-related-list"
+}

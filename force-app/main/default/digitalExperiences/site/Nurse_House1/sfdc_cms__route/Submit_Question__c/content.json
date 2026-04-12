@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Submit Question",
+  "contentBody" : {
+    "activeViewId" : "Submit_Question",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-submit-question",
+    "urlPrefix" : "submit-question"
+  },
+  "urlName" : "submit-question"
+}

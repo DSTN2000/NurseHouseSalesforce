@@ -17,12 +17,29 @@ delete oldProcs;
 
 delete [SELECT Id FROM OperatingHours WHERE Name LIKE 'Nurse House%' LIMIT 200];
 
-// Operating Hours 
+// Operating Hours
 List<OperatingHours> opHours = new List<OperatingHours>{
-    new OperatingHours(Name = 'Nurse House Medical Centre Hours',       TimeZone = 'America/New_York'),
-    new OperatingHours(Name = 'Nurse House Client Support Hours',       TimeZone = 'America/New_York')
+    new OperatingHours(Name = 'Nurse House Medical Centre Hours',  TimeZone = 'America/New_York'),
+    new OperatingHours(Name = 'Nurse House Client Support Hours',  TimeZone = 'America/New_York')
 };
 insert opHours;
+
+// Time Slots — Medical Centre: Mon–Sat 08:00–18:00
+List<TimeSlot> timeSlots = new List<TimeSlot>{
+    new TimeSlot(OperatingHoursId = opHours[0].Id, DayOfWeek = 'Monday',    StartTime = Time.newInstance(8, 0, 0, 0), EndTime = Time.newInstance(18, 0, 0, 0)),
+    new TimeSlot(OperatingHoursId = opHours[0].Id, DayOfWeek = 'Tuesday',   StartTime = Time.newInstance(8, 0, 0, 0), EndTime = Time.newInstance(18, 0, 0, 0)),
+    new TimeSlot(OperatingHoursId = opHours[0].Id, DayOfWeek = 'Wednesday', StartTime = Time.newInstance(8, 0, 0, 0), EndTime = Time.newInstance(18, 0, 0, 0)),
+    new TimeSlot(OperatingHoursId = opHours[0].Id, DayOfWeek = 'Thursday',  StartTime = Time.newInstance(8, 0, 0, 0), EndTime = Time.newInstance(18, 0, 0, 0)),
+    new TimeSlot(OperatingHoursId = opHours[0].Id, DayOfWeek = 'Friday',    StartTime = Time.newInstance(8, 0, 0, 0), EndTime = Time.newInstance(18, 0, 0, 0)),
+    new TimeSlot(OperatingHoursId = opHours[0].Id, DayOfWeek = 'Saturday',  StartTime = Time.newInstance(9, 0, 0, 0), EndTime = Time.newInstance(14, 0, 0, 0)),
+    // Time Slots — Client Support: Mon–Fri 09:00–17:00
+    new TimeSlot(OperatingHoursId = opHours[1].Id, DayOfWeek = 'Monday',    StartTime = Time.newInstance(9, 0, 0, 0), EndTime = Time.newInstance(17, 0, 0, 0)),
+    new TimeSlot(OperatingHoursId = opHours[1].Id, DayOfWeek = 'Tuesday',   StartTime = Time.newInstance(9, 0, 0, 0), EndTime = Time.newInstance(17, 0, 0, 0)),
+    new TimeSlot(OperatingHoursId = opHours[1].Id, DayOfWeek = 'Wednesday', StartTime = Time.newInstance(9, 0, 0, 0), EndTime = Time.newInstance(17, 0, 0, 0)),
+    new TimeSlot(OperatingHoursId = opHours[1].Id, DayOfWeek = 'Thursday',  StartTime = Time.newInstance(9, 0, 0, 0), EndTime = Time.newInstance(17, 0, 0, 0)),
+    new TimeSlot(OperatingHoursId = opHours[1].Id, DayOfWeek = 'Friday',    StartTime = Time.newInstance(9, 0, 0, 0), EndTime = Time.newInstance(17, 0, 0, 0))
+};
+insert timeSlots;
 
 // Action Centres 
 List<Action_Centre__c> centres = new List<Action_Centre__c>{
@@ -142,4 +159,4 @@ List<Visit_Procedure__c> vps = new List<Visit_Procedure__c>{
 };
 insert vps;
 
-System.debug('Seed complete: 2 operating hours, 3 centres, 3 nurses, 5 procedures, 9 centre-procedures, 5 visits, 9 visit-procedures');
+System.debug('Seed complete: 2 operating hours, 11 time slots, 3 centres, 3 nurses, 5 procedures, 9 centre-procedures, 5 visits, 9 visit-procedures');

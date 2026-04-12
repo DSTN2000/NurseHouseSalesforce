@@ -1,0 +1,70 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Survey",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"fa414545-f7e3-44a4-8902-653f9fb55f80\",\"columns\":[{\"UUID\":\"48e64bd7-85bf-4cd5-ab25-56cba64658a4\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "flowArguments" : "[{\"label\":\"visitId\",\"dataType\":\"String\",\"supportsRecordId\":false,\"inputType\":\"text\",\"name\":\"visitId\",\"type\":\"String\",\"value\":\"{!visitId}\"}]",
+                "flowName" : "{\"flowName\":\"Nurse_Review_Survey\",\"flowLabel\":\"Nurse_Review_Survey\"}"
+              },
+              "definition" : "dxp_flow:flow",
+              "id" : "9fdaef7e-e53c-41a7-a024-8b8ac42bc718",
+              "type" : "component"
+            } ],
+            "id" : "48e64bd7-85bf-4cd5-ab25-56cba64658a4",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "fa414545-f7e3-44a4-8902-653f9fb55f80",
+          "type" : "component"
+        } ],
+        "id" : "6f861896-3231-4d59-b9e1-401fbec4ba83",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "pageTitle" : "Survey",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "b3dd834b-8b9e-4f77-90be-071c6e1d178a",
+          "type" : "component"
+        } ],
+        "id" : "f7d1de15-3ad9-4dbb-80dc-7cbf825eec7b",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "df7df478-08ff-4fcf-8980-dda1560926a1",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-survey"
+  },
+  "urlName" : "survey"
+}

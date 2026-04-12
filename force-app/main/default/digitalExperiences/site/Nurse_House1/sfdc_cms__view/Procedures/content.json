@@ -1,0 +1,67 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Procedures",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"ff5fb508-aeba-43ab-a4cc-393285acd7e6\",\"columns\":[{\"UUID\":\"d5307450-cefa-43bc-94a1-6cbae6f25ac6\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : { },
+              "definition" : "c:procedureList",
+              "id" : "66e265d0-8abb-4fdd-8e40-4016c03ff691",
+              "type" : "component"
+            } ],
+            "id" : "d5307450-cefa-43bc-94a1-6cbae6f25ac6",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "ff5fb508-aeba-43ab-a4cc-393285acd7e6",
+          "type" : "component"
+        } ],
+        "id" : "792972a7-7ffe-48bd-acfc-227993393113",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "customHeadTags" : "",
+            "description" : "",
+            "pageTitle" : "Procedures",
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "91b3c55b-0506-4450-9c7a-7fdab4ec7441",
+          "type" : "component"
+        } ],
+        "id" : "091e743e-e6a2-404e-919f-4e25fa23ccc4",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "308eac76-0a6b-4962-b882-7b3a22f4c516",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "custom-procedures"
+  },
+  "urlName" : "procedures"
+}

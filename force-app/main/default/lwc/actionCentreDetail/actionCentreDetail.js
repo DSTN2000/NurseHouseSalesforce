@@ -17,17 +17,22 @@ export default class ActionCentreDetail extends LightningElement {
         }
     }
 
+    _timeSlots = [];
+
     @wire(getActionCentre, { recordId: '$recordId' })
     wiredCentre({ data, error }) {
         if (data) {
-            this.centre = data;
+            this.centre = data.centre;
+            this._timeSlots = data.timeSlots ?? [];
             this.error = null;
         } else if (error) {
             this.error = error;
             this.centre = null;
+            this._timeSlots = [];
         } else if (data === null) {
             this.error = { message: 'Action Centre not found.' };
             this.centre = null;
+            this._timeSlots = [];
         }
     }
 
@@ -53,4 +58,26 @@ export default class ActionCentreDetail extends LightningElement {
     get hasNurses() {
         return this.nurses.length > EMPTY_LIST.length;
     }
+
+    get timeSlots() {
+        return this._timeSlots.map(slot => ({
+            day: slot.DayOfWeek,
+            hours: `${formatTime(slot.StartTime)} – ${formatTime(slot.EndTime)}`,
+            key: slot.DayOfWeek
+        }));
+    }
+
+    get hasTimeSlots() {
+        return this._timeSlots.length > EMPTY_LIST.length;
+    }
+}
+
+function formatTime(timeVal) {
+    // LWR serialises Salesforce Time fields as milliseconds since midnight
+    const totalMinutes = Math.floor(timeVal / 60000);
+    const hour = Math.floor(totalMinutes / 60);
+    const minute = totalMinutes % 60;
+    const period = hour < 12 ? 'AM' : 'PM';
+    const displayHour = hour % 12 || 12;
+    return `${displayHour}:${String(minute).padStart(2, '0')} ${period}`;
 }

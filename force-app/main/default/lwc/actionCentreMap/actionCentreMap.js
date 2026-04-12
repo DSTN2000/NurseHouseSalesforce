@@ -15,12 +15,24 @@ const addContactInfo = (centre, displayInfo) => {
     }
 };
 
-const buildDescription = (centre) => {
+const msToHHMM = (ms) => {
+    const totalMinutes = Math.floor(ms / 60000);
+    const h = Math.floor(totalMinutes / 60);
+    const m = totalMinutes % 60;
+    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+};
+
+const formatTimeSlots = (slots) => {
+    return slots.map(slot => `${slot.DayOfWeek} ${msToHHMM(slot.StartTime)}–${msToHHMM(slot.EndTime)}`).join(', ');
+};
+
+const buildDescription = (wrapper) => {
+    const centre = wrapper.centre;
     const displayInfo = [];
-    if (centre.Work_Time__r) {
-        displayInfo.push(`Hours: ${centre.Work_Time__r.Name}`);
+    if (wrapper.timeSlots && wrapper.timeSlots.length > 0) {
+        displayInfo.push(`Hours: ${formatTimeSlots(wrapper.timeSlots)}`);
     }
-    displayInfo.push(centre.Address__c)
+    displayInfo.push(centre.Address__c);
     if (centre.Type__c === CLIENT_SUPPORT_TYPE) {
         addContactInfo(centre, displayInfo);
     }
@@ -34,11 +46,11 @@ const buildLocation = (centre) => {
     return { City: centre.City__c, Country: centre.Country__c, Street: centre.Street__c };
 };
 
-const buildMarker = (centre) => ({
-    description: buildDescription(centre),
-    location: buildLocation(centre),
-    title: centre.Name,
-    value: centre.Id
+const buildMarker = (wrapper) => ({
+    description: buildDescription(wrapper),
+    location: buildLocation(wrapper.centre),
+    title: wrapper.centre.Name,
+    value: wrapper.centre.Id
 });
 
 export default class ActionCentreMap extends NavigationMixin(LightningElement) {
