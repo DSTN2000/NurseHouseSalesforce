@@ -6,7 +6,7 @@ private class CaseTriggerHandlerTest {
         insert new Case(Subject = 'I need help', SuppliedName = 'Anna Kovalenko', SuppliedEmail = 'anna@example.com', Origin = 'Web', Status = 'New');
         Case c = [SELECT Id, Subject, SuppliedName, SuppliedEmail, Origin, CaseNumber FROM Case LIMIT 1];
 
-        List<Messaging.SingleEmailMessage> emails = CaseTriggerHandler.buildEmails(new List<Case>{ c });
+        List<Messaging.SingleEmailMessage> emails = CaseTriggerHandler.buildEmails(new List<Case>{ c }, null);
 
         Assert.areEqual(1, emails.size(), 'Expected one email');
         Assert.areEqual('anna@example.com', emails[0].getToAddresses()[0], 'Wrong recipient');
@@ -19,7 +19,7 @@ private class CaseTriggerHandlerTest {
         insert new Case(Subject = 'Anonymous enquiry', SuppliedEmail = 'anon@example.com', Origin = 'Web', Status = 'New');
         Case c = [SELECT Id, Subject, SuppliedName, SuppliedEmail, Origin, CaseNumber FROM Case LIMIT 1];
 
-        List<Messaging.SingleEmailMessage> emails = CaseTriggerHandler.buildEmails(new List<Case>{ c });
+        List<Messaging.SingleEmailMessage> emails = CaseTriggerHandler.buildEmails(new List<Case>{ c }, null);
 
         Assert.areEqual(1, emails.size(), 'Expected one email');
         Assert.isTrue(emails[0].getHtmlBody().contains('Dear Customer,'), 'Should fall back to generic greeting');
@@ -33,7 +33,7 @@ private class CaseTriggerHandlerTest {
         };
         List<Case> cases = [SELECT Id, Subject, SuppliedName, SuppliedEmail, Origin, CaseNumber FROM Case];
 
-        List<Messaging.SingleEmailMessage> emails = CaseTriggerHandler.buildEmails(cases);
+        List<Messaging.SingleEmailMessage> emails = CaseTriggerHandler.buildEmails(cases, null);
 
         Assert.areEqual(2, emails.size(), 'Expected one email per case');
     }

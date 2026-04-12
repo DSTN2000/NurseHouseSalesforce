@@ -1,4 +1,4 @@
-public with sharing class CaseTriggerHandler {
+public without sharing class CaseTriggerHandler {
 
     private static final Set<String> CONFIRMATION_ORIGINS = new Set<String>{ 'Web', 'Email' };
     private static final String EMAIL_SUBJECT = 'Your request has been received — Nurse House';
@@ -8,7 +8,27 @@ public with sharing class CaseTriggerHandler {
         if (eligible.isEmpty()) {
             return;
         }
-        List<Messaging.SingleEmailMessage> emails = buildEmails(eligible);
+        // Send via @future so emails are dispatched with a verified org-wide sender identity,
+        // bypassing the guest user's unverified email address which Salesforce blocks
+        Set<String> eligibleIds = new Set<String>();
+        for (Case c : eligible) {
+            eligibleIds.add(c.Id);
+        }
+        sendConfirmationEmailsAsync(eligibleIds);
+    }
+
+    @future
+    private static void sendConfirmationEmailsAsync(Set<String> caseIds) {
+        List<Case> cases = [
+            SELECT Id, Subject, SuppliedName, SuppliedEmail, CaseNumber
+            FROM Case
+            WHERE Id IN :caseIds
+        ];
+        // Use org-wide address so delivery is not blocked when the @future
+        // runs in a context initiated by a guest user (unverified sender)
+        List<OrgWideEmailAddress> owas = [SELECT Id FROM OrgWideEmailAddress LIMIT 1];
+        Id owaId = owas.isEmpty() ? null : owas[0].Id;
+        List<Messaging.SingleEmailMessage> emails = buildEmails(cases, owaId);
         Messaging.sendEmail(emails, false);
     }
 
@@ -23,22 +43,23 @@ public with sharing class CaseTriggerHandler {
     }
 
     @TestVisible
-    private static List<Messaging.SingleEmailMessage> buildEmails(List<Case> cases) {
+    private static List<Messaging.SingleEmailMessage> buildEmails(List<Case> cases, Id owaId) {
         List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
         for (Case c : cases) {
-            emails.add(buildEmail(c));
+            emails.add(buildEmail(c, owaId));
         }
         return emails;
     }
 
-    private static Messaging.SingleEmailMessage buildEmail(Case c) {
+    private static Messaging.SingleEmailMessage buildEmail(Case c, Id owaId) {
         Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
         email.setToAddresses(new List<String>{ c.SuppliedEmail });
         email.setSubject(EMAIL_SUBJECT);
         email.setHtmlBody(buildHtmlBody(c));
-        // Required when sending to arbitrary addresses with no targetObjectId —
-        // without this Salesforce tries to log an activity and may suppress delivery
         email.setSaveAsActivity(false);
+        if (owaId != null) {
+            email.setOrgWideEmailAddressId(owaId);
+        }
         return email;
     }
 
