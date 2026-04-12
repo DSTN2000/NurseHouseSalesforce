@@ -137,4 +137,32 @@ private class ProcedureControllerTest {
         Assert.areEqual(3.27, rates.USD_to_BYN__c, 'USD rate should match stored value');
         Assert.areEqual(3.56, rates.EUR_to_BYN__c, 'EUR rate should match stored value');
     }
+
+    @IsTest
+    static void getCentreProcedures_returnsLinkedRecords() {
+        Action_Centre__c centre = createCentre();
+        Product2 product = createProduct('Test Procedure');
+
+        insert new Centre_Procedure__c(
+            Action_Centre__c = centre.Id,
+            Procedure__c     = product.Id
+        );
+
+        Test.startTest();
+        List<Centre_Procedure__c> results = ProcedureController.getCentreProcedures();
+        Test.stopTest();
+
+        Assert.isFalse(results.isEmpty(), 'Should return at least one Centre_Procedure__c link');
+        Assert.areEqual(centre.Id, results[0].Action_Centre__c, 'Centre should match');
+        Assert.areEqual(product.Id, results[0].Procedure__c, 'Procedure should match');
+    }
+
+    @IsTest
+    static void getCentreProcedures_returnsEmptyListWhenNone() {
+        Test.startTest();
+        List<Centre_Procedure__c> results = ProcedureController.getCentreProcedures();
+        Test.stopTest();
+
+        Assert.areEqual(0, results.size(), 'Should return empty list when no links exist');
+    }
 }
